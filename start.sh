@@ -14,15 +14,15 @@ echo "[ytdl] Creating ytdl config directory if it does not exist.";
 mkdir -p "$HOME/.config/ytdl/";
 
 echo "[ytdl] Retrieving default ytdl-config file...";
-onlineycfgmd5sum="$(curl -sL https://git.io/JJ670 | md5sum | cut -d ' ' -f 1)";
+#onlineycfgmd5sum="$(curl -sL https://git.io/JJ670 | md5sum | cut -d ' ' -f 1)";
 ycfgpath="$HOME/.config/ytdl/ytdl-config";
 if [[ -f "$ycfgpath" ]]; then
-    if [[ "$(md5sum "$ycfgpath" | cut -d ' ' -f 1)" \
-            == "$onlineycfgmd5sum" ]]; then
-        echo "[ytdl] Found identical ytdl-config, not getting remote one.";
-    else
+    #if [[ "$(md5sum "$ycfgpath" | cut -d ' ' -f 1)" \
+    #        == "$onlineycfgmd5sum" ]]; then
+    #    echo "[ytdl] Found identical ytdl-config, not getting remote one.";
+    #else
         echo "[ytdl] Found custom ytdl-config, not getting remote one.";
-    fi
+    #fi
 else
     echo "[ytdl] Retrieving ytdl config script...";
     ytdlcfgurl="https://raw.githubusercontent.com/nth10sd";
@@ -35,7 +35,7 @@ echo "Creating ~/bin directory if it does not yet exist...";
 mkdir -p "$HOME/bin/";
 echo "Retrieving termux-url-opener script...";
 urlopenerpath="$HOME/bin/termux-url-opener"
-urlopenerurl="https://raw.githubusercontent.com/nth10sd"
+urlopenerurl="https://raw.githubusercontent.com/joectchan"
 urlopenerurl+="/ytdl/master/cfg/termux-url-opener"
 curl --proto '=https' --tlsv1.2 -sSf \
     -o "$urlopenerpath" "$urlopenerurl";
