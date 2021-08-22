@@ -13,9 +13,9 @@ pip install --user --upgrade "$1";
 echo "[ytdl] Parsing ytdl-config...";
 ycfgpath="$HOME/.config/ytdl/ytdl-config";
 # Default values
-audq="3"
-dlfolder="/data/data/com.termux/files/home/storage/downloads"
-maxvidq="480"
+audq="0"
+dlfolder="/data/data/com.termux/files/home/storage"
+maxvidq="360"
 IFS="=";
 while read -r variable value; do
 if [[ $variable == audq ]]; then
@@ -36,24 +36,24 @@ done < "$ycfgpath";
 echo "[ytdl] Running $1...";
 if [[ "$3" == [yY] || "$3" == [yY][eE][sS] ]]; then
     echo "Creating destination directory...";
-    mkdir -p "$HOME/storage/downloads/VideosObtained/";
+    #mkdir -p "$HOME/storage/downloads/VideosObtained/";
     echo "Downloading both portions as preference was: $3";
     "/data/data/com.termux/files/home/.local/bin/$1" \
         --add-metadata --no-mtime --no-overwrites \
         --write-sub --embed-subs --all-subs \
         -f "best[height<=$maxvidq]" \
-        -o "$dlfolder/VideosObtained/%(title)s-maxVq$maxvidq.%(ext)s" \
+        -o "$dlfolder/movies/%(title)s-maxVq$maxvidq.%(ext)s" \
         "$2" \
     ;
 else
     echo "Creating destination directory...";
-    mkdir -p "$HOME/storage/downloads/SongsObtained/";
+    #mkdir -p "$HOME/storage/downloads/SongsObtained/";
     if [[ "$audq" == BEST ]]; then
         echo "Downloading best audio-only quality available...";
         "/data/data/com.termux/files/home/.local/bin/$1" \
             --add-metadata --no-mtime --no-overwrites \
             --extract-audio --audio-format best \
-            -o "$dlfolder/SongsObtained/%(title)s-Aq$audq.%(ext)s" \
+            -o "$dlfolder/music/%(title)s-Aq$audq.%(ext)s" \
             "$2" \
         ;
     else
@@ -62,7 +62,7 @@ else
             --add-metadata --no-mtime --no-overwrites \
             --extract-audio --audio-format mp3 --audio-quality "$audq" \
             --prefer-ffmpeg --postprocessor-args "-id3v2_version 3" \
-            -o "$dlfolder/SongsObtained/%(title)s-Aq$audq.%(ext)s" \
+            -o "$dlfolder/music/%(title)s-Aq$audq.%(ext)s" \
             "$2" \
         ;
     fi
