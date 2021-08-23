@@ -69,7 +69,10 @@ else
             last_file=$(ls $dlfolder/music/ -t | head -1);
             echo "Play $last_file with termux-media-player";
             termux-media-player play $last_file;
-            termux-media-player info;
+            playing=$(termux-media-player info | head -1);
+            while [[ $playing =~ .*Playing.* ]]; do
+                sleep(300)
+            done
         fi
     fi
 fi
