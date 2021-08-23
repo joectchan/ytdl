@@ -71,7 +71,7 @@ else
             termux-media-player play $last_file;
             playing=$(termux-media-player info | head -1);
             while [[ $playing =~ .*Playing.* ]]; do
-                sleep(300)
+                sleep 300
             done
         fi
     fi
