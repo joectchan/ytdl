@@ -68,7 +68,7 @@ else
         ;
     fi
     last_file=$(ls $dlfolder/music/ -t | head -1);
-    termux-share -a send -c audio/MPA $dlfolder/music/$last_file;
+    #termux-share -a send -c audio/MPA $dlfolder/music/$last_file;
     read -p "(debug) pause" junk 
     if [[ "$playing" == [yY] || "$playing" == [yY][eE][sS] ]]; then
         echo "Play $last_file with termux-media-player";
@@ -76,7 +76,7 @@ else
         playing=$(termux-media-player info | head -1);
         while [[ $playing =~ .*Playing.* ]]; do
             # Attempt to prevent Android killing this process
-            sleep 300;
+            sleep 5;
             playing=$(termux-media-player info | head -1);
         done
     fi
