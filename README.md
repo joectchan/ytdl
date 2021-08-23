@@ -2,12 +2,11 @@
 
 # ytdl
 
-Download Termux from any of the following places:
+Download [Termux](https://f-droid.org/en/packages/com.termux/) from F-Droid. Note that a rooted device is **not** necessary.
 
-* [F-Droid](https://f-droid.org/en/packages/com.termux/)
-* [Google Play Store](https://play.google.com/store/apps/details?id=com.termux)
 
-    Note that a rooted device is **not** necessary.
+Optionally, download [Termux:API](https://f-droid.org/packages/com.termux.api/) to provide `termux-media-player`, and other command you may want to use.
+    
 
 **\[Important\]** Give Termux permissions to access storage, if access has not been previously granted:
 
