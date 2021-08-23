@@ -48,8 +48,8 @@ if [[ "$3" == [yY] || "$3" == [yY][eE][sS] ]]; then
 else
     echo "Creating destination directory...";
     #mkdir -p "$HOME/storage/downloads/SongsObtained/";
+    playing=$4
     if [[ "$audq" == BEST ]]; then
-        playing=$4
         echo "Downloading best audio-only quality available...";
         "/data/data/com.termux/files/home/.local/bin/$1" \
             --add-metadata --no-mtime --no-overwrites \
@@ -57,18 +57,6 @@ else
             -o "$dlfolder/music/%(title)s-Aq$audq.%(ext)s" \
             "$2" \
         ;
-        last_file=$(ls $dlfolder/music/ -t | head -1);
-        termux-share -c audio/MPA $dlfolder/music/$last_file;
-        if [[ "$playing" == [yY] || "$playing" == [yY][eE][sS] ]]; then
-            echo "Play $last_file with termux-media-player";
-            termux-media-player play $dlfolder/music/$last_file;
-            playing=$(termux-media-player info | head -1);
-            while [[ $playing =~ .*Playing.* ]]; do
-                # Attempt to prevent Android killing this process
-                sleep 300;
-                playing=$(termux-media-player info | head -1);
-            done
-        fi
     else
         echo "Downloading audio-only and re-encoding to MP3...";
         "/data/data/com.termux/files/home/.local/bin/$1" \
@@ -78,5 +66,17 @@ else
             -o "$dlfolder/music/%(title)s-Aq$audq.%(ext)s" \
             "$2" \
         ;
+    fi
+    last_file=$(ls $dlfolder/music/ -t | head -1);
+    termux-share -c audio/MPA $dlfolder/music/$last_file;
+    if [[ "$playing" == [yY] || "$playing" == [yY][eE][sS] ]]; then
+        echo "Play $last_file with termux-media-player";
+        termux-media-player play $dlfolder/music/$last_file;
+        playing=$(termux-media-player info | head -1);
+        while [[ $playing =~ .*Playing.* ]]; do
+            # Attempt to prevent Android killing this process
+            sleep 300;
+            playing=$(termux-media-player info | head -1);
+        done
     fi
 fi
