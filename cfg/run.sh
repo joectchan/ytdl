@@ -71,7 +71,9 @@ else
             termux-media-player play $last_file;
             playing=$(termux-media-player info | head -1);
             while [[ $playing =~ .*Playing.* ]]; do
-                sleep 300
+                # Attempt to prevent Android killing this process
+                sleep 300;
+                playing=$(termux-media-player info | head -1);
             done
         fi
     fi
