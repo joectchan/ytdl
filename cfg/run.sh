@@ -58,6 +58,12 @@ else
         ;
     else
         echo "(debug) Did you want to play audio? $4";
+        echo "(debug) Did you want to play audio? $4";
+        echo "(debug) Did you want to play audio? $4";
+        playing=$4
+        echo "(debug) Did you want to play audio? $playing";
+        echo "(debug) Did you want to play audio? $playing";
+        echo "(debug) Did you want to play audio? $playing";
         echo "Downloading audio-only and re-encoding to MP3...";
         "/data/data/com.termux/files/home/.local/bin/$1" \
             --add-metadata --no-mtime --no-overwrites \
@@ -66,7 +72,10 @@ else
             -o "$dlfolder/music/%(title)s-Aq$audq.%(ext)s" \
             "$2" \
         ;
-        if [[ "$4" == [yY] || "$4" == [yY][eE][sS] ]]; then
+        echo "(debug) Did you want to play audio? $playing";
+        echo "(debug) Did you want to play audio? $playing";
+        echo "(debug) Did you want to play audio? $playing";
+        if [[ "$playing" == [yY] || "$playing" == [yY][eE][sS] ]]; then
             last_file=$(ls $dlfolder/music/ -t | head -1);
             echo "Play $last_file with termux-media-player";
             termux-media-player play $last_file;
