@@ -57,6 +57,7 @@ else
             "$2" \
         ;
     else
+        echo "(debug) Did you want to play audio? $4";
         echo "Downloading audio-only and re-encoding to MP3...";
         "/data/data/com.termux/files/home/.local/bin/$1" \
             --add-metadata --no-mtime --no-overwrites \
@@ -65,7 +66,6 @@ else
             -o "$dlfolder/music/%(title)s-Aq$audq.%(ext)s" \
             "$2" \
         ;
-        echo "(debug) Did you want to play audio? $4";
         if [[ "$4" == [yY] || "$4" == [yY][eE][sS] ]]; then
             last_file=$(ls $dlfolder/music/ -t | head -1);
             echo "Play $last_file with termux-media-player";
