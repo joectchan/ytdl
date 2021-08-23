@@ -7,3 +7,6 @@ read -p 'Download video portion? (y/n): ' -r video;
 curl -L --proto '=https' --tlsv1.2 -sSf \
     https://raw.githubusercontent.com/joectchan/ytdl/master/cfg/run.sh \
     | bash -s -- PLACEHOLDERNAME "$url" "$video" "$mplayer";
+    
+read -p 'Debug: back to url-opener' -r junk;
+echo 'Debug: Play audio with termux-media-player? $mplayer'
