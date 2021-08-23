@@ -49,27 +49,20 @@ else
     echo "Creating destination directory...";
     #mkdir -p "$HOME/storage/downloads/SongsObtained/";
     if [[ "$audq" == BEST ]]; then
+        echo "(debug) Did you want to play audio? $4";
+        playing=$4
+        echo "(debug) Did you want to play audio? $playing";
+        echo "(debug) Did you want to play audio? $4";
+        playing=$4
+        echo "(debug) Did you want to play audio? $playing";
+        echo "(debug) Did you want to play audio? $4";
+        echo "(debug) Did you want to play audio? $playing";
+        echo "(debug) Did you want to play audio? $playing";
+        read -p 'Debug: in run.sh before downloading' -r junk;
         echo "Downloading best audio-only quality available...";
         "/data/data/com.termux/files/home/.local/bin/$1" \
             --add-metadata --no-mtime --no-overwrites \
             --extract-audio --audio-format best \
-            -o "$dlfolder/music/%(title)s-Aq$audq.%(ext)s" \
-            "$2" \
-        ;
-    else
-        echo "(debug) Did you want to play audio? $4";
-        echo "(debug) Did you want to play audio? $4";
-        echo "(debug) Did you want to play audio? $4";
-        playing=$4
-        echo "(debug) Did you want to play audio? $playing";
-        echo "(debug) Did you want to play audio? $playing";
-        echo "(debug) Did you want to play audio? $playing";
-        read -p 'Debug: in run.sh before downloading' -r junk;
-        echo "Downloading audio-only and re-encoding to MP3...";
-        "/data/data/com.termux/files/home/.local/bin/$1" \
-            --add-metadata --no-mtime --no-overwrites \
-            --extract-audio --audio-format mp3 --audio-quality "$audq" \
-            --prefer-ffmpeg --postprocessor-args "-id3v2_version 3" \
             -o "$dlfolder/music/%(title)s-Aq$audq.%(ext)s" \
             "$2" \
         ;
@@ -93,5 +86,14 @@ else
                 playing=$(termux-media-player info | head -1);
             done
         fi
+    else
+        echo "Downloading audio-only and re-encoding to MP3...";
+        "/data/data/com.termux/files/home/.local/bin/$1" \
+            --add-metadata --no-mtime --no-overwrites \
+            --extract-audio --audio-format mp3 --audio-quality "$audq" \
+            --prefer-ffmpeg --postprocessor-args "-id3v2_version 3" \
+            -o "$dlfolder/music/%(title)s-Aq$audq.%(ext)s" \
+            "$2" \
+        ;
     fi
 fi
