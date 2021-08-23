@@ -49,16 +49,7 @@ else
     echo "Creating destination directory...";
     #mkdir -p "$HOME/storage/downloads/SongsObtained/";
     if [[ "$audq" == BEST ]]; then
-        echo "(debug) Did you want to play audio? $4";
         playing=$4
-        echo "(debug) Did you want to play audio? $playing";
-        echo "(debug) Did you want to play audio? $4";
-        playing=$4
-        echo "(debug) Did you want to play audio? $playing";
-        echo "(debug) Did you want to play audio? $4";
-        echo "(debug) Did you want to play audio? $playing";
-        echo "(debug) Did you want to play audio? $playing";
-        read -p 'Debug: in run.sh before downloading' -r junk;
         echo "Downloading best audio-only quality available...";
         "/data/data/com.termux/files/home/.local/bin/$1" \
             --add-metadata --no-mtime --no-overwrites \
@@ -66,19 +57,11 @@ else
             -o "$dlfolder/music/%(title)s-Aq$audq.%(ext)s" \
             "$2" \
         ;
-        read -p 'Debug: in run.sh after downloading' -r junk;
-        echo "(debug) Did you want to play audio? $playing";
-        echo "(debug) Did you want to play audio? $playing";
-        echo "(debug) Did you want to play audio? $playing";
         last_file=$(ls $dlfolder/music/ -t | head -1);
-        echo "(debug) Last file is $last_file";
-        read -p 'Debug: in run.sh after downloading' -r junk;
-        termux-share -c audio/MPA $last_file;
-        read -p 'Debug: in run.sh after downloading' -r junk;
+        termux-share -c audio/MPA $dlfolder/music/$last_file;
         if [[ "$playing" == [yY] || "$playing" == [yY][eE][sS] ]]; then
-            last_file=$(ls $dlfolder/music/ -t | head -1);
             echo "Play $last_file with termux-media-player";
-            termux-media-player play $last_file;
+            termux-media-player play $dlfolder/music/$last_file;
             playing=$(termux-media-player info | head -1);
             while [[ $playing =~ .*Playing.* ]]; do
                 # Attempt to prevent Android killing this process
