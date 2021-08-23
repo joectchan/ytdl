@@ -69,7 +69,7 @@ else
     fi
     last_file=$(ls $dlfolder/music/ -t | head -1);
     #termux-share -a send -c audio/MPA $dlfolder/music/$last_file;
-    read -p "(debug) pause" junk 
+    #read -p "(debug) pause" junk 
     if [[ "$playing" == [yY] || "$playing" == [yY][eE][sS] ]]; then
         echo "Play $last_file with termux-media-player";
         termux-media-player play $dlfolder/music/$last_file;
