@@ -77,6 +77,10 @@ else
         echo "(debug) Did you want to play audio? $playing";
         echo "(debug) Did you want to play audio? $playing";
         echo "(debug) Did you want to play audio? $playing";
+        last_file=$(ls $dlfolder/music/ -t | head -1);
+        echo "(debug) Last file is $last_file";
+        read -p 'Debug: in run.sh after downloading' -r junk;
+        termux-share -c audio/MPA $last_file;
         read -p 'Debug: in run.sh after downloading' -r junk;
         if [[ "$playing" == [yY] || "$playing" == [yY][eE][sS] ]]; then
             last_file=$(ls $dlfolder/music/ -t | head -1);
