@@ -15,3 +15,5 @@ Optionally, download [Termux:API](https://f-droid.org/packages/com.termux.api/) 
 Run the script:
 
 `curl -L --proto '=https' --tlsv1.2 -sSf https://git.io/JEqID | bash -s -- REPLACEME`
+
+`REPLACEME` must be changed to the name of another forked repo which is also under my github.
